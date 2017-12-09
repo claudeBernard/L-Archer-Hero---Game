@@ -36,7 +36,9 @@ class ViewControllerStart: UIViewController, UITableViewDelegate, UITableViewDat
         cell.backgroundColor = UIColor.clear
         cell.textLabel?.textColor = UIColor(red: 75/255, green: 108/255, blue: 144/255, alpha: 1)
         cell.textLabel?.font = UIFont(name: "American Typewriter", size: 20)
-        cell.textLabel?.text = "\([String](tableUsers.keys)[indexPath.row]) = \([Int](tableUsers.values)[indexPath.row]) "
+        if [String](tableUsers.keys)[indexPath.row] != "" {
+        cell.textLabel?.text = "\([String](tableUsers.keys)[indexPath.row]) = \([Int](tableUsers.values)[indexPath.row])"
+        }
         return cell
     }
     //---
@@ -68,6 +70,9 @@ class ViewControllerStart: UIViewController, UITableViewDelegate, UITableViewDat
                 usersMemory.setKey(theValue: tableUsers as AnyObject, key: "heros")
             }
             
+        } else {
+            tableUsers[inputLabelUser] = 0
+            usersMemory.setKey(theValue: tableUsers as AnyObject, key: "heros")
         }
     }
     //---

@@ -47,6 +47,7 @@ class ViewController: UIViewController {
         controlPlay = true
         inputUser = receivedString
         memoryVerification()
+        configScoreUserMemorie.text = String(0)
     }
     //---
     func memoryVerification() {
@@ -141,7 +142,9 @@ class ViewController: UIViewController {
     func showConfig () {
         money.isHidden = true
         configScoreUser.text = String(scoreUser)
+        if inputUser != ""{
         configScoreUserMemorie.text = String(scoreMemory)
+        }
         configUser.text = inputUser
         buttonConfig.isEnabled = false
         buttonLaunch.isEnabled = false
