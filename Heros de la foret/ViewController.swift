@@ -32,6 +32,7 @@ class ViewController: UIViewController {
     var tableUsers = [String: Int]()
     var tableUsersFinal = [String: Int]()
     var showPlacarConfig = false
+    var parabola = 1.0
     //---
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,48 +120,42 @@ class ViewController: UIViewController {
         arrow.center.x += CGFloat(cos)
         
         if arrow.center.x <= 200 {
-            arrow.center.y += CGFloat(sin)
-            
-        } else if arrow.center.x > 200 && arrow.center.x <= 235 {
-            arrow.center.y += CGFloat(sin/1.5)
-            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(-(archerDates/1.5)))
-            
-        } else if arrow.center.x > 235 && arrow.center.x <= 270 {
-            arrow.center.y += CGFloat(sin/2)
-            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(-(archerDates/2)))
-            
+            arrow.center.y += CGFloat(sin/parabola)
+
+        } else if arrow.center.x > 200 && arrow.center.x <= 270 {
+            arrow.center.y += CGFloat(sin/(parabola*1.5))
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(-(Double(archerDates)/(parabola*1.5))))
+
         } else if arrow.center.x > 270 && arrow.center.x <= 305 {
-            arrow.center.y += CGFloat(sin/2.5)
-            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(-(archerDates/2.5)))
+            arrow.center.y += CGFloat(sin/(parabola*2.5))
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(-(Double(archerDates)/(parabola*2.5))))
             
         } else if arrow.center.x > 305 && arrow.center.x <= 340 {
-            arrow.center.y += CGFloat(sin/3)
-            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(-(archerDates/3)))
-            
+            arrow.center.y += CGFloat(sin/(parabola*3))
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(-(Double(archerDates)/(parabola*3))))
+
         } else if arrow.center.x > 340 && arrow.center.x <= 375 {
             arrow.center.y -= CGFloat(0)
             self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(0))
-            
+
         } else if arrow.center.x > 375 && arrow.center.x <= 410 {
-            arrow.center.y -= CGFloat(sin/3.5)
-            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(+(archerDates/3.5)))
-            
+            arrow.center.y -= CGFloat(sin/(parabola*3.5))
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(+(Double(archerDates)/(parabola*3.5))))
+
         } else if arrow.center.x > 410 && arrow.center.x <= 445 {
-            arrow.center.y -= CGFloat(sin/3)
-            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(+(archerDates/3)))
-            
-        } else if arrow.center.x > 445 && arrow.center.x <= 480 {
-            arrow.center.y -= CGFloat(sin/2.5)
-            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(+(archerDates/2.5)))
-        
-        } else if arrow.center.x > 480 && arrow.center.x <= 515 {
-            arrow.center.y -= CGFloat(sin/2.5)
-            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(+(archerDates/2.5)))
-            
+            arrow.center.y -= CGFloat(sin/(parabola*3))
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(+(Double(archerDates)/(parabola*3))))
+
+        } else if arrow.center.x > 445 && arrow.center.x <= 515 {
+            arrow.center.y -= CGFloat(sin/(parabola*1))
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(+(Double(archerDates)/(parabola*1))))
+
         } else if arrow.center.x > 515 {
-            arrow.center.y -= CGFloat(sin/2)
-            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(+(archerDates/2)))
+            arrow.center.y -= CGFloat(sin/(parabola/2))
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(+(Double(archerDates)/(parabola/2))))
         }
+        
+        parabola += 0.004
     }
     //---
     @objc func animateMoney() {
@@ -173,6 +168,7 @@ class ViewController: UIViewController {
     }
     //---
     @IBAction func launchArrow(_ sender: UIButton) {
+        parabola = 1.0
         if controlPlay == true && controlChanges > 0{
             archer.image = UIImage(named: "hero2.png")
             arrow.isHidden = false
@@ -219,7 +215,7 @@ class ViewController: UIViewController {
     }
     //---
     @IBAction func config(_ sender: UIButton) {
-        showConfig ()
+            showConfig ()
     }
     //---
     @IBAction func reset(_ sender: UIButton) {
