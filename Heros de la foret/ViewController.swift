@@ -60,6 +60,7 @@ class ViewController: UIViewController {
         archerDates = sender.value
         UIView.animate(withDuration: 1.0, animations: {
             self.archer.transform = CGAffineTransform(rotationAngle: CGFloat(-(sender.value)))
+            //print(CGFloat(-(sender.value)))
         })
     }
     //---
@@ -116,7 +117,50 @@ class ViewController: UIViewController {
             }
         }
         arrow.center.x += CGFloat(cos)
-        arrow.center.y += CGFloat(sin)
+        
+        if arrow.center.x <= 200 {
+            arrow.center.y += CGFloat(sin)
+            
+        } else if arrow.center.x > 200 && arrow.center.x <= 235 {
+            arrow.center.y += CGFloat(sin/1.5)
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(-(archerDates/1.5)))
+            
+        } else if arrow.center.x > 235 && arrow.center.x <= 270 {
+            arrow.center.y += CGFloat(sin/2)
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(-(archerDates/2)))
+            
+        } else if arrow.center.x > 270 && arrow.center.x <= 305 {
+            arrow.center.y += CGFloat(sin/2.5)
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(-(archerDates/2.5)))
+            
+        } else if arrow.center.x > 305 && arrow.center.x <= 340 {
+            arrow.center.y += CGFloat(sin/3)
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(-(archerDates/3)))
+            
+        } else if arrow.center.x > 340 && arrow.center.x <= 375 {
+            arrow.center.y -= CGFloat(0)
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(0))
+            
+        } else if arrow.center.x > 375 && arrow.center.x <= 410 {
+            arrow.center.y -= CGFloat(sin/3.5)
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(+(archerDates/3.5)))
+            
+        } else if arrow.center.x > 410 && arrow.center.x <= 445 {
+            arrow.center.y -= CGFloat(sin/3)
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(+(archerDates/3)))
+            
+        } else if arrow.center.x > 445 && arrow.center.x <= 480 {
+            arrow.center.y -= CGFloat(sin/2.5)
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(+(archerDates/2.5)))
+        
+        } else if arrow.center.x > 480 && arrow.center.x <= 515 {
+            arrow.center.y -= CGFloat(sin/2.5)
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(+(archerDates/2.5)))
+            
+        } else if arrow.center.x > 515 {
+            arrow.center.y -= CGFloat(sin/2)
+            self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(+(archerDates/2)))
+        }
     }
     //---
     @objc func animateMoney() {
